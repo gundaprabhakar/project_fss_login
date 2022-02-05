@@ -1,0 +1,140 @@
+
+import java.io.Serializable;
+
+public class Employee implements Serializable{
+	private int employeeId;
+	private String employeeName;
+	private float basicpay;
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Employee(int employeeId, String employeeName, float basicpay) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.basicpay = basicpay;
+	}
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public float getBasicpay() {
+		return basicpay;
+	}
+	public void setBasicpay(float basicpay) {
+		this.basicpay = basicpay;
+	}
+	
+	
+
+}
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import beans.Employee;
+
+
+
+public class Login {
+    static List<Employee> elist;
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		
+		System.out.println("enter user name:");
+		String username = br.readLine();
+		System.out.println("enter password:");
+		String password = br.readLine();
+		System.out.println("enter your role:");
+		System.out.println("1.Administrator\n2.Employee");
+		int role = Integer.parseInt(br.readLine());
+		switch(role)
+		{
+		case 1:
+			adminlogin();
+			break;
+		case 2:
+			addEmployee();
+			break;
+		}
+		br.close();
+	}
+	
+public static void adminlogin() throws NumberFormatException,IOException{
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	System.out.println("Menu for Administrator");
+	System.out.println("1.Add Employee\n2.edit Employee\n3.Delete Employee\n4.Display Employees\n5.Quit");
+	int response = Integer.parseInt(br.readLine());
+	switch(response) {
+	case 1:
+		addEmployee();
+		break;
+	case 2:
+		editEmployee();
+		break;
+	case 3:
+		deleteEmployee();
+		break;
+	case 4:
+		displayEmployees(elist);
+		break;
+	case 5:
+		break;
+	default:
+		System.out.println("Invalid option!!!!");
+	}
+	br.close();
+}
+
+
+public static void addEmployee() throws NumberFormatException,IOException{
+	System.out.println("adding new employee");
+	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	elist=new ArrayList<Employee>();
+	char cho='y';
+	
+	while(cho=='y' || cho=='Y')
+	{
+		Employee e=new Employee();
+		
+		System.out.println("enter employee ID:");
+		e.setEmployeeId(Integer.parseInt(br.readLine()));
+		System.out.println("enter employee name:");
+		e.setEmployeeName(br.readLine());
+		
+		System.out.println("Enter basic Pay in Rs.");
+		e.setBasicpay(Float.parseFloat(br.readLine()));
+		elist.add(e);
+		System.out.println("wish to add more?(y/n)");
+		cho=br.readLine().charAt(0);
+		
+	}
+	adminlogin();
+}
+public static void editEmployee () {
+	
+}
+public static void deleteEmployee() {
+	
+}
+  public static void displayEmployees(List<Employee> elist) {
+	  for(Employee e:elist)
+	  {
+		  System.out.println("ID:"+e.getEmployeeId());
+		  System.out.println("Name:"+e.getEmployeeName());
+		  System.out.println("basic pay Rs:"+e.getBasicpay());
+	  }
+  }
+}
