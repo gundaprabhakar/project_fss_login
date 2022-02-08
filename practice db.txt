@@ -1,0 +1,93 @@
+create database product
+use product
+create table product(prid Int,prname varchar(40),prprice float,prquantity Int(5),prcost float,prtype char(7));
+select * from product;
+insert into product (prid,prname,prprice,prquantity,prcost,prtype)
+values(1,'gemini',55,5,0,'d'),(1,'lipton',65,7,0,'l'),(1,'assam',60,15,0,'l');
+describe product;
+select sysdate();
+select length("apple");
+use kitchenonline;
+show tables;
+select * from product;
+insert into product(2,'prabha',54,3,0,'d');
+rollback;
+commit;
+alter table product modify column prname varchar(50);
+desc product;
+alter table product modify column prid integer(5);
+select * from product;
+select prname,min(prprice) from product;
+show tables;
+desc student
+create table myproduct as select * from product;
+select * from myproduct;
+create table voter(voter_id int,voter_name varchar(50) not null,voter_age int check(voter_age>=18));
+insert into voter values(1,'prabha',20);
+select * from voter;
+delete from voter where voter_name='prabha';
+set sql_safe_updates=0;
+alter table voter modify voter_id int primary key;
+select voter_id from voter;
+CREATE TABLE employees (
+    emp_no INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50));
+INSERT INTO employees(first_name,last_name)
+VALUES('John','Doe'),
+      ('Mary','Jane');
+SELECT * FROM employees;
+CREATE TABLE buildings (
+    building_no INT PRIMARY KEY AUTO_INCREMENT,
+    building_name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL
+);
+CREATE TABLE rooms (
+    room_no INT PRIMARY KEY AUTO_INCREMENT,
+    room_name VARCHAR(255) NOT NULL,
+    building_no INT NOT NULL,
+    FOREIGN KEY (building_no)
+        REFERENCES buildings (building_no)
+        ON DELETE CASCADE
+);
+INSERT INTO buildings(building_name,address)
+VALUES('ACME Headquaters','3950 North 1st Street CA 95134'),
+      ('ACME Sales','5000 North 1st Street CA 95134');
+  SELECT * FROM buildings;
+  INSERT INTO rooms(room_name,building_no)
+VALUES('Amazon',1),
+      ('War Room',1),
+      ('Office of CEO',1),
+      ('Marketing',2),
+      ('Showroom',2);
+SELECT * FROM rooms;
+DELETE FROM buildings 
+WHERE building_no = 2;
+select * from buildings;
+CREATE TABLE cart_items 
+(
+    item_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL,
+    price DEC(5,2) NOT NULL,
+    sales_tax DEC(5,2) NOT NULL DEFAULT 0.1,
+    CHECK(quantity > 0),
+    CHECK(sales_tax >= 0) 
+);
+DESC cart_items;
+INSERT INTO cart_items(name, quantity, price)
+VALUES('Keyboard', 1, 50);
+SELECT * FROM cart_items;
+INSERT INTO cart_items(name, quantity, price, sales_tax)
+VALUES('Battery',4, 0.25 , DEFAULT);
+SELECT * FROM cart_items;
+show tables;
+
+SELECT 'MySQL ' 'String ' 'Concatenation';
+SELECT CONCAT('MySQL','fss');
+SELECT CONCAT('MySQL',NULL,'CONCAT');
+SELECT CONCAT_WS(NULL ,'Jonathan', 'Smith');
+SELECT INSTR('mysql INSTR', 'mysql');
+select * from employees where last_name like '%e';
+
+
